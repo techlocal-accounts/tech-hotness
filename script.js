@@ -110,29 +110,100 @@ document.querySelectorAll('.gallery-item').forEach((item, index) => {
     observer.observe(item);
 });
 
-// Parallax effect for hero section
-let ticking = false;
-function updateParallax() {
-    const scrolled = window.pageYOffset;
-    const heroContent = document.querySelector('.hero-content');
-    const heroBg = document.querySelector('.hero-bg');
-    
-    if (heroContent && heroBg) {
-        heroContent.style.transform = `translateY(${scrolled * 0.5}px)`;
-        heroBg.style.transform = `translateY(${scrolled * 0.2}px)`;
+// Animated tech background canvas
+const canvas = document.getElementById('hero-canvas');
+const ctx = canvas.getContext('2d');
+
+// Set canvas size
+function setCanvasSize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+setCanvasSize();
+window.addEventListener('resize', setCanvasSize);
+
+// Particle system for subtle tech animation
+class Particle {
+    constructor() {
+        this.reset();
     }
     
-    ticking = false;
-}
-
-function requestTick() {
-    if (!ticking) {
-        window.requestAnimationFrame(updateParallax);
-        ticking = true;
+    reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.5;
+        this.speedY = (Math.random() - 0.5) * 0.5;
+        this.opacity = Math.random() * 0.5 + 0.1;
+    }
+    
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        
+        // Wrap around edges
+        if (this.x < 0) this.x = canvas.width;
+        if (this.x > canvas.width) this.x = 0;
+        if (this.y < 0) this.y = canvas.height;
+        if (this.y > canvas.height) this.y = 0;
+    }
+    
+    draw() {
+        ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+        ctx.fillRect(this.x, this.y, this.size, this.size);
     }
 }
 
-window.addEventListener('scroll', requestTick);
+// Create particles (fewer on mobile for performance)
+const particles = [];
+const isMobileDevice = window.innerWidth <= 768;
+const particleCount = isMobileDevice ? 50 : 100;
+for (let i = 0; i < particleCount; i++) {
+    particles.push(new Particle());
+}
+
+// Connection lines between nearby particles
+function drawConnections() {
+    // Skip connections on mobile for better performance
+    if (isMobileDevice) return;
+    
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+    ctx.lineWidth = 0.5;
+    
+    for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance < 150) {
+                ctx.beginPath();
+                ctx.moveTo(particles[i].x, particles[i].y);
+                ctx.lineTo(particles[j].x, particles[j].y);
+                ctx.stroke();
+            }
+        }
+    }
+}
+
+// Animation loop
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Update and draw particles
+    particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+    });
+    
+    // Draw connections
+    drawConnections();
+    
+    requestAnimationFrame(animate);
+}
+
+// Start animation
+animate();
 
 // Add hover effect to CTA buttons
 document.querySelectorAll('.cta-button').forEach(button => {
