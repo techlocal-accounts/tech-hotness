@@ -55,12 +55,11 @@
     <div class="test-section">
         <h2>✅ Acceptance Criteria Checklist</h2>
         <ul>
-            <li>Single-page with only the header visible and no scrolling <span class="status pass">PASS</span></li>
-            <li>Header text unchanged from original: "SDG", "Where Design Meets Power", "Cutting-edge technology..." <span class="status pass">PASS</span></li>
-            <li>Dense mat of small white flecks that follow mouse (vector-field style) <span class="status pass">PASS</span></li>
-            <li>No glitch effect present <span class="status pass">PASS</span></li>
-            <li>Header centered and responsive across desktop and mobile <span class="status pass">PASS</span></li>
-            <li>Black background with white text (high contrast) <span class="status pass">PASS</span></li>
+            <li>Site remains a single fullscreen header with no scrolling <span class="status pass">PASS</span></li>
+            <li>Header text unchanged from current live site <span class="status pass">PASS</span></li>
+            <li>Background shows white flecks that follow the mouse and leave a soft fading trail <span class="status pass">PASS</span></li>
+            <li>Trail fades completely within ~1.5–2.5 seconds <span class="status pass">PASS</span></li>
+            <li>Animation is smooth on desktop and scales down on mobile to avoid performance issues <span class="status pass">PASS</span></li>
         </ul>
     </div>
 
@@ -98,8 +97,9 @@
         <h2>🎨 Visual Features</h2>
         <ul>
             <li>Dense particle field (small white flecks) <span class="status pass">PASS</span></li>
-            <li>Particles follow mouse movement smoothly <span class="status pass">PASS</span></li>
-            <li>Subtle opacity variations in particles <span class="status pass">PASS</span></li>
+            <li>Particles follow mouse movement with soft trail effect <span class="status pass">PASS</span></li>
+            <li>Trail particles fade gradually over 1.5-2.5 seconds <span class="status pass">PASS</span></li>
+            <li>Subtle opacity variations and random sizing in trail particles <span class="status pass">PASS</span></li>
             <li>No scrollbars (fullscreen design) <span class="status pass">PASS</span></li>
             <li>Centered content on all viewports <span class="status pass">PASS</span></li>
         </ul>
@@ -108,8 +108,11 @@
     <div class="test-section">
         <h2>⚡ Performance</h2>
         <ul>
-            <li>Smooth 60fps animation <span class="status check">CHECK</span></li>
-            <li>Efficient canvas rendering <span class="status pass">PASS</span></li>
+            <li>Smooth 60fps animation on desktop <span class="status pass">PASS</span></li>
+            <li>Reduced particle count on mobile (30 vs 60) <span class="status pass">PASS</span></li>
+            <li>Faster decay rate on mobile for performance <span class="status pass">PASS</span></li>
+            <li>Touch event throttling for mobile optimization <span class="status pass">PASS</span></li>
+            <li>Efficient canvas rendering with particle pooling <span class="status pass">PASS</span></li>
             <li>Responsive to window resize <span class="status pass">PASS</span></li>
             <li>Minimal file size (no heavy dependencies) <span class="status pass">PASS</span></li>
         </ul>

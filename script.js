@@ -3,9 +3,15 @@ class ParticleField {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
         this.particles = [];
+        this.trailParticles = [];
         this.mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+        this.lastMouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
         this.gridSize = 12;
         this.particleSize = 1.5;
+        this.isMobile = window.innerWidth <= 768;
+        this.maxTrailParticles = this.isMobile ? 30 : 60;
+        this.trailSpawnRate = this.isMobile ? 3 : 5;
+        this.frameCount = 0;
         
         this.init();
         this.animate();
@@ -23,7 +29,12 @@ class ParticleField {
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
         
+        this.isMobile = window.innerWidth <= 768;
+        this.maxTrailParticles = this.isMobile ? 30 : 60;
+        this.trailSpawnRate = this.isMobile ? 3 : 5;
+        
         this.particles = [];
+        this.trailParticles = [];
         const cols = Math.ceil(this.canvas.width / this.gridSize) + 2;
         const rows = Math.ceil(this.canvas.height / this.gridSize) + 2;
         
@@ -46,14 +57,53 @@ class ParticleField {
     }
     
     handleMouseMove(e) {
+        this.lastMouse.x = this.mouse.x;
+        this.lastMouse.y = this.mouse.y;
         this.mouse.x = e.clientX;
         this.mouse.y = e.clientY;
+        this.spawnTrailParticles();
     }
     
     handleTouchMove(e) {
         if (e.touches.length > 0) {
+            this.lastMouse.x = this.mouse.x;
+            this.lastMouse.y = this.mouse.y;
             this.mouse.x = e.touches[0].clientX;
             this.mouse.y = e.touches[0].clientY;
+            if (!this.isMobile || this.frameCount % 2 === 0) {
+                this.spawnTrailParticles();
+            }
+        }
+    }
+    
+    spawnTrailParticles() {
+        const dx = this.mouse.x - this.lastMouse.x;
+        const dy = this.mouse.y - this.lastMouse.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        if (distance < 2) return;
+        
+        const particlesToSpawn = Math.min(this.trailSpawnRate, Math.floor(distance / 5));
+        
+        for (let i = 0; i < particlesToSpawn; i++) {
+            if (this.trailParticles.length >= this.maxTrailParticles) {
+                this.trailParticles.shift();
+            }
+            
+            const progress = i / particlesToSpawn;
+            const x = this.lastMouse.x + dx * progress;
+            const y = this.lastMouse.y + dy * progress;
+            
+            this.trailParticles.push({
+                x: x + (Math.random() - 0.5) * 10,
+                y: y + (Math.random() - 0.5) * 10,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                size: 0.5 + Math.random() * 1.5,
+                opacity: 0.6 + Math.random() * 0.4,
+                life: 1.0,
+                decay: this.isMobile ? 0.015 : 0.008
+            });
         }
     }
     
@@ -62,6 +112,8 @@ class ParticleField {
     }
     
     update() {
+        this.frameCount++;
+        
         this.particles.forEach(particle => {
             const dx = this.mouse.x - particle.x;
             const dy = this.mouse.y - particle.y;
@@ -87,6 +139,17 @@ class ParticleField {
             particle.x += particle.vx;
             particle.y += particle.vy;
         });
+        
+        this.trailParticles = this.trailParticles.filter(particle => {
+            particle.x += particle.vx;
+            particle.y += particle.vy;
+            particle.vx *= 0.98;
+            particle.vy *= 0.98;
+            particle.life -= particle.decay;
+            particle.opacity = particle.life * (0.6 + Math.random() * 0.1);
+            
+            return particle.life > 0;
+        });
     }
     
     draw() {
@@ -106,6 +169,13 @@ class ParticleField {
             this.ctx.globalAlpha = opacity;
             this.ctx.beginPath();
             this.ctx.arc(particle.x, particle.y, this.particleSize, 0, Math.PI * 2);
+            this.ctx.fill();
+        });
+        
+        this.trailParticles.forEach(particle => {
+            this.ctx.globalAlpha = particle.opacity;
+            this.ctx.beginPath();
+            this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
             this.ctx.fill();
         });
         
