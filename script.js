@@ -171,6 +171,118 @@ document.querySelectorAll('.cta-button').forEach(button => {
     });
 });
 
+// Arrow Vector Field Animation
+class VectorField {
+    constructor(canvas) {
+        this.canvas = canvas;
+        this.ctx = canvas.getContext('2d');
+        this.arrows = [];
+        this.mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+        this.gridSize = 30;
+        this.arrowSize = 8;
+        
+        this.init();
+        this.animate();
+        
+        this.handleMouseMove = this.handleMouseMove.bind(this);
+        this.handleResize = this.handleResize.bind(this);
+        
+        window.addEventListener('mousemove', this.handleMouseMove);
+        window.addEventListener('resize', this.handleResize);
+    }
+    
+    init() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+        
+        this.arrows = [];
+        const cols = Math.ceil(this.canvas.width / this.gridSize);
+        const rows = Math.ceil(this.canvas.height / this.gridSize);
+        
+        for (let i = 0; i < cols; i++) {
+            for (let j = 0; j < rows; j++) {
+                this.arrows.push({
+                    x: i * this.gridSize + this.gridSize / 2,
+                    y: j * this.gridSize + this.gridSize / 2,
+                    angle: 0,
+                    targetAngle: 0,
+                    opacity: 0.15
+                });
+            }
+        }
+    }
+    
+    handleMouseMove(e) {
+        this.mouse.x = e.clientX;
+        this.mouse.y = e.clientY;
+    }
+    
+    handleResize() {
+        this.init();
+    }
+    
+    update() {
+        this.arrows.forEach(arrow => {
+            const dx = this.mouse.x - arrow.x;
+            const dy = this.mouse.y - arrow.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance < 200) {
+                arrow.targetAngle = Math.atan2(dy, dx);
+                arrow.opacity = Math.min(0.6, 0.15 + (200 - distance) / 400);
+            } else {
+                arrow.targetAngle = Math.random() * Math.PI * 2;
+                arrow.opacity = 0.15;
+            }
+            
+            const angleDiff = arrow.targetAngle - arrow.angle;
+            arrow.angle += angleDiff * 0.1;
+        });
+    }
+    
+    draw() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        
+        this.arrows.forEach(arrow => {
+            this.ctx.save();
+            this.ctx.translate(arrow.x, arrow.y);
+            this.ctx.rotate(arrow.angle);
+            
+            this.ctx.strokeStyle = `rgba(255, 255, 255, ${arrow.opacity})`;
+            this.ctx.lineWidth = 1;
+            this.ctx.lineCap = 'round';
+            
+            this.ctx.beginPath();
+            this.ctx.moveTo(-this.arrowSize / 2, 0);
+            this.ctx.lineTo(this.arrowSize / 2, 0);
+            this.ctx.stroke();
+            
+            this.ctx.beginPath();
+            this.ctx.moveTo(this.arrowSize / 2, 0);
+            this.ctx.lineTo(this.arrowSize / 2 - 3, -2);
+            this.ctx.moveTo(this.arrowSize / 2, 0);
+            this.ctx.lineTo(this.arrowSize / 2 - 3, 2);
+            this.ctx.stroke();
+            
+            this.ctx.restore();
+        });
+    }
+    
+    animate() {
+        this.update();
+        this.draw();
+        requestAnimationFrame(() => this.animate());
+    }
+}
+
+// Initialize vector field when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    const canvas = document.getElementById('vector-field');
+    if (canvas) {
+        new VectorField(canvas);
+    }
+});
+
 // Page load animation
 window.addEventListener('load', function() {
     document.body.style.opacity = '1';
