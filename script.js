@@ -155,7 +155,12 @@ class ParticleField {
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         
-        this.ctx.fillStyle = 'rgba(255, 255, 255, 1)';
+        // Calculate viewport center
+        const centerX = this.canvas.width / 2;
+        const centerY = this.canvas.height / 2;
+        
+        // Calculate maximum distance from center to corner
+        const maxDistanceFromCenter = Math.sqrt(centerX * centerX + centerY * centerY);
         
         this.particles.forEach(particle => {
             const dx = particle.x - particle.baseX;
@@ -166,6 +171,21 @@ class ParticleField {
             
             const opacity = particle.opacity * (1 - normalizedDisplacement * 0.5);
             
+            // Calculate distance from particle to viewport center
+            const distFromCenterX = particle.x - centerX;
+            const distFromCenterY = particle.y - centerY;
+            const distanceFromCenter = Math.sqrt(distFromCenterX * distFromCenterX + distFromCenterY * distFromCenterY);
+            
+            // Calculate fade factor (0 at center, 1 at edges)
+            const edgeFade = Math.min(distanceFromCenter / maxDistanceFromCenter, 1);
+            
+            // Smooth the fade curve using easing function
+            const smoothFade = edgeFade * edgeFade;
+            
+            // Interpolate color from white to black based on edge distance
+            const colorValue = Math.round(255 * (1 - smoothFade));
+            
+            this.ctx.fillStyle = `rgba(${colorValue}, ${colorValue}, ${colorValue}, 1)`;
             this.ctx.globalAlpha = opacity;
             this.ctx.beginPath();
             this.ctx.arc(particle.x, particle.y, this.particleSize, 0, Math.PI * 2);
@@ -173,6 +193,21 @@ class ParticleField {
         });
         
         this.trailParticles.forEach(particle => {
+            // Calculate distance from particle to viewport center
+            const distFromCenterX = particle.x - centerX;
+            const distFromCenterY = particle.y - centerY;
+            const distanceFromCenter = Math.sqrt(distFromCenterX * distFromCenterX + distFromCenterY * distFromCenterY);
+            
+            // Calculate fade factor (0 at center, 1 at edges)
+            const edgeFade = Math.min(distanceFromCenter / maxDistanceFromCenter, 1);
+            
+            // Smooth the fade curve using easing function
+            const smoothFade = edgeFade * edgeFade;
+            
+            // Interpolate color from white to black based on edge distance
+            const colorValue = Math.round(255 * (1 - smoothFade));
+            
+            this.ctx.fillStyle = `rgba(${colorValue}, ${colorValue}, ${colorValue}, 1)`;
             this.ctx.globalAlpha = particle.opacity;
             this.ctx.beginPath();
             this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);

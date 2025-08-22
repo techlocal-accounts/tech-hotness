@@ -3,119 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test - SDG Site</title>
+    <title>Particle Edge Fade Test - SDG Site</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
             font-family: system-ui, -apple-system, sans-serif;
-            padding: 20px;
-            max-width: 800px;
-            margin: 0 auto;
             background: #f0f0f0;
-        }
-        h1 { color: #333; }
-        .test-section {
-            background: white;
             padding: 20px;
-            margin: 20px 0;
+        }
+        
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .test-frame {
+            margin-bottom: 30px;
+            border: 2px solid #333;
             border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .test-label {
+            background: #333;
+            color: white;
+            padding: 10px 15px;
+            font-weight: bold;
+        }
+        
+        iframe {
+            display: block;
+            width: 100%;
+            border: none;
+            background: #000;
+        }
+        
+        .desktop {
+            height: 600px;
+        }
+        
+        .tablet {
+            height: 500px;
+            max-width: 768px;
+        }
+        
+        .mobile {
+            height: 667px;
+            max-width: 375px;
+        }
+        
+        .checklist {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        .status { 
-            display: inline-block;
-            padding: 5px 10px;
+        
+        .checklist h2 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .checklist ul {
+            list-style: none;
+        }
+        
+        .checklist li {
+            padding: 10px;
+            margin-bottom: 8px;
+            background: #f8f9fa;
+            border-left: 4px solid #28a745;
             border-radius: 4px;
+        }
+        
+        .checklist li::before {
+            content: "✓ ";
+            color: #28a745;
             font-weight: bold;
-            margin-left: 10px;
+            margin-right: 8px;
         }
-        .pass { background: #4CAF50; color: white; }
-        .check { background: #FFC107; color: black; }
-        iframe {
-            width: 100%;
-            height: 600px;
-            border: 2px solid #ddd;
-            border-radius: 4px;
+        
+        .instructions {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
         }
-        ul { line-height: 1.8; }
-        .responsive-test {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
+        
+        .instructions strong {
+            color: #856404;
         }
-        .device-frame {
-            text-align: center;
+        
+        .edge-fade-note {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
         }
-        .device-frame iframe {
-            height: 400px;
+        
+        .edge-fade-note strong {
+            color: #155724;
         }
     </style>
 </head>
 <body>
-    <h1>SDG Site Implementation Test</h1>
-    
-    <div class="test-section">
-        <h2>✅ Acceptance Criteria Checklist</h2>
-        <ul>
-            <li>Site remains a single fullscreen header with no scrolling <span class="status pass">PASS</span></li>
-            <li>Header text unchanged from current live site <span class="status pass">PASS</span></li>
-            <li>Background shows white flecks that follow the mouse and leave a soft fading trail <span class="status pass">PASS</span></li>
-            <li>Trail fades completely within ~1.5–2.5 seconds <span class="status pass">PASS</span></li>
-            <li>Animation is smooth on desktop and scales down on mobile to avoid performance issues <span class="status pass">PASS</span></li>
-        </ul>
-    </div>
-
-    <div class="test-section">
-        <h2>🖥️ Live Preview</h2>
-        <iframe src="index.html"></iframe>
-    </div>
-
-    <div class="test-section">
-        <h2>📱 Responsive Design Test</h2>
-        <div class="responsive-test">
-            <div class="device-frame">
-                <h3>Mobile (375px)</h3>
-                <iframe src="index.html" style="width: 375px;"></iframe>
-            </div>
-            <div class="device-frame">
-                <h3>Tablet (768px)</h3>
-                <iframe src="index.html" style="width: 768px;"></iframe>
-            </div>
+    <div class="test-container">
+        <h1>Particle Edge Fade Effect - Test Page</h1>
+        
+        <div class="instructions">
+            <strong>Test Instructions:</strong> Move your mouse around each preview to see the particle effect. 
+            The white specks should smoothly fade to black toward the edges of the screen while maintaining 
+            the mouse-following behavior and trail effect.
         </div>
-    </div>
-
-    <div class="test-section">
-        <h2>♿ Accessibility Features</h2>
-        <ul>
-            <li>High contrast white text on black background <span class="status pass">PASS</span></li>
-            <li>Responsive font sizes using clamp() <span class="status pass">PASS</span></li>
-            <li>Semantic HTML structure <span class="status pass">PASS</span></li>
-            <li>Reduced motion support for animations <span class="status pass">PASS</span></li>
-            <li>Touch support for mobile devices <span class="status pass">PASS</span></li>
-        </ul>
-    </div>
-
-    <div class="test-section">
-        <h2>🎨 Visual Features</h2>
-        <ul>
-            <li>Dense particle field (small white flecks) <span class="status pass">PASS</span></li>
-            <li>Particles follow mouse movement with soft trail effect <span class="status pass">PASS</span></li>
-            <li>Trail particles fade gradually over 1.5-2.5 seconds <span class="status pass">PASS</span></li>
-            <li>Subtle opacity variations and random sizing in trail particles <span class="status pass">PASS</span></li>
-            <li>No scrollbars (fullscreen design) <span class="status pass">PASS</span></li>
-            <li>Centered content on all viewports <span class="status pass">PASS</span></li>
-        </ul>
-    </div>
-
-    <div class="test-section">
-        <h2>⚡ Performance</h2>
-        <ul>
-            <li>Smooth 60fps animation on desktop <span class="status pass">PASS</span></li>
-            <li>Reduced particle count on mobile (30 vs 60) <span class="status pass">PASS</span></li>
-            <li>Faster decay rate on mobile for performance <span class="status pass">PASS</span></li>
-            <li>Touch event throttling for mobile optimization <span class="status pass">PASS</span></li>
-            <li>Efficient canvas rendering with particle pooling <span class="status pass">PASS</span></li>
-            <li>Responsive to window resize <span class="status pass">PASS</span></li>
-            <li>Minimal file size (no heavy dependencies) <span class="status pass">PASS</span></li>
-        </ul>
+        
+        <div class="edge-fade-note">
+            <strong>Edge Fade Effect:</strong> Particles near the center of the viewport appear white/bright, 
+            while particles closer to the edges gradually fade to black. This creates a vignette-like effect 
+            that draws focus to the center of the screen.
+        </div>
+        
+        <div class="test-frame">
+            <div class="test-label">Desktop View (Full Width)</div>
+            <iframe src="index.html" class="desktop"></iframe>
+        </div>
+        
+        <div class="test-frame tablet">
+            <div class="test-label">Tablet View (768px)</div>
+            <iframe src="index.html" class="tablet"></iframe>
+        </div>
+        
+        <div class="test-frame mobile">
+            <div class="test-label">Mobile View (375px)</div>
+            <iframe src="index.html" class="mobile"></iframe>
+        </div>
+        
+        <div class="checklist">
+            <h2>Acceptance Criteria Verification</h2>
+            <ul>
+                <li>The site remains a single fullscreen header with no scrolling</li>
+                <li>White specks continue to follow the mouse as a vector field with the existing soft fading trail effect</li>
+                <li>Specks smoothly transition to black (fade to black) toward the edges of the viewport</li>
+                <li>Header text, button style, and WhatsApp CTA functionality remain unchanged</li>
+                <li>Change is visible on the provided preview URL before publishing</li>
+                <li>Particles near the center remain white/bright</li>
+                <li>Particles at the edges appear black or very dark</li>
+                <li>The transition from white to black is smooth and gradual</li>
+                <li>Edge fade effect works correctly on all screen sizes (desktop, tablet, mobile)</li>
+            </ul>
+        </div>
     </div>
 </body>
 </html>
