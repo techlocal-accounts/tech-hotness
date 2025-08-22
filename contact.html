@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="af">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kontak - Internis Praktyk. Kontakvorm, e-pos en WhatsApp vir vinnige kommunikasie en aanlynafspraakvorm.">
+    <title>Kontak - Internis Praktyk</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-header">
+                <a href="index.html" class="logo">Internis Praktyk</a>
+                <button class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Tuisblad</a></li>
+                <li><a href="about.html">Oor Ons</a></li>
+                <li><a href="services.html">Dienste</a></li>
+                <li><a href="contact.html" class="active">Kontak</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-hero">
+        <div class="container">
+            <h1>Kontak Ons</h1>
+            <p>Bespreek 'n afspraak of kontak ons vir meer inligting</p>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-form-wrapper">
+                    <h2>Bespreek 'n Afspraak</h2>
+                    <p class="form-intro">Vul die vorm hieronder in om 'n afspraak te bespreek. Ons sal u so gou moontlik kontak.</p>
+                    
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Volle Naam *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">E-pos Adres *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Selfoon Nommer *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="date">Verkiesde Datum *</label>
+                                <input type="date" id="date" name="date" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="time">Verkiesde Tyd</label>
+                                <select id="time" name="time">
+                                    <option value="">Kies 'n tyd</option>
+                                    <option value="08:00">08:00</option>
+                                    <option value="08:30">08:30</option>
+                                    <option value="09:00">09:00</option>
+                                    <option value="09:30">09:30</option>
+                                    <option value="10:00">10:00</option>
+                                    <option value="10:30">10:30</option>
+                                    <option value="11:00">11:00</option>
+                                    <option value="11:30">11:30</option>
+                                    <option value="12:00">12:00</option>
+                                    <option value="14:00">14:00</option>
+                                    <option value="14:30">14:30</option>
+                                    <option value="15:00">15:00</option>
+                                    <option value="15:30">15:30</option>
+                                    <option value="16:00">16:00</option>
+                                    <option value="16:30">16:30</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="reason">Rede vir Afspraak</label>
+                            <select id="reason" name="reason">
+                                <option value="">Kies 'n opsie</option>
+                                <option value="konsultasie">Algemene Konsultasie</option>
+                                <option value="opvolg">Opvolg Afspraak</option>
+                                <option value="chroniese">Chroniese Siekte Bestuur</option>
+                                <option value="sifting">Gesondheidsifting</option>
+                                <option value="ander">Ander</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Addisionele Inligting</label>
+                            <textarea id="message" name="message" rows="4" placeholder="Enige spesiale versoeke of inligting wat ons moet weet..."></textarea>
+                        </div>
+                        
+                        <div class="form-group checkbox-group">
+                            <label>
+                                <input type="checkbox" name="consent" required>
+                                <span>Ek stem in dat my inligting gebruik mag word om my te kontak aangaande my afspraak</span>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-submit">Stuur Bespreking</button>
+                        
+                        <div id="formMessage" class="form-message" style="display: none;"></div>
+                    </form>
+                </div>
+                
+                <div class="contact-info">
+                    <div class="info-card">
+                        <h3>Kontak Inligting</h3>
+                        <div class="info-item">
+                            <strong>E-pos:</strong>
+                            <a href="mailto:devin@techlocal.co.za">devin@techlocal.co.za</a>
+                        </div>
+                        <div class="info-item">
+                            <strong>WhatsApp:</strong>
+                            <a href="https://wa.me/27000000000" target="_blank">000 000 0000</a>
+                        </div>
+                        <div class="info-item">
+                            <strong>Adres:</strong>
+                            <p>[Straat Adres]<br>[Stad, Poskode]</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>Konsultasie-ure</h3>
+                        <div class="hours-table">
+                            <div class="hour-row">
+                                <span>Maandag - Vrydag:</span>
+                                <span>08:00 - 17:00</span>
+                            </div>
+                            <div class="hour-row">
+                                <span>Saterdag:</span>
+                                <span>09:00 - 13:00</span>
+                            </div>
+                            <div class="hour-row">
+                                <span>Sondag:</span>
+                                <span>Gesluit</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="whatsapp-cta-card">
+                        <h3>Vinnige WhatsApp Kontak</h3>
+                        <p>Het u 'n dringende vraag? Kontak ons direk via WhatsApp vir vinnige hulp.</p>
+                        <a href="https://wa.me/27000000000" target="_blank" class="btn btn-whatsapp btn-block">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.149-.67.149-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="currentColor"/>
+                            </svg>
+                            Begin WhatsApp Gesprek
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="container">
+            <h2>Gereelde Vrae</h2>
+            <p class="section-subtitle">Antwoorde op algemene navrae</p>
+            
+            <div class="faq-accordion">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Watter mediese fondse word aanvaar?</span>
+                        <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Ons aanvaar die meeste groot mediese fondse. Kontak ons gerus om te bevestig of u spesifieke mediese fonds aanvaar word. Kontant pasiënte is ook welkom.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Wat is die kansellasiebeleid?</span>
+                        <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Afsprake kan tot 24 uur voor die geskeduleerde tyd gekanselleer word sonder enige koste. Laat kansellasies of nie-opdaging mag 'n fooi tot gevolg hê.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Wat moet ek saambring na my eerste konsultasie?</span>
+                        <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Bring asseblief u ID, mediese fonds kaart, 'n lys van huidige medikasie, en enige relevante mediese rekords of toetsresultate saam.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Hoe lank duur 'n tipiese konsultasie?</span>
+                        <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Nuwe pasiënt konsultasies duur gewoonlik 30-45 minute, terwyl opvolg konsultasies ongeveer 15-30 minute duur, afhangende van die kompleksiteit van u toestand.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Is parkering beskikbaar?</span>
+                        <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Ja, gratis parkering is beskikbaar vir pasiënte direk voor die praktyk gebou.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Internis Praktyk</h3>
+                    <p>Kontemporêre sorg, persoonlike aandag</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Vinnige Skakels</h4>
+                    <ul>
+                        <li><a href="index.html">Tuisblad</a></li>
+                        <li><a href="about.html">Oor Ons</a></li>
+                        <li><a href="services.html">Dienste</a></li>
+                        <li><a href="contact.html">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Kontak Inligting</h4>
+                    <p>E-pos: devin@techlocal.co.za</p>
+                    <p>WhatsApp: 000 000 0000</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Internis Praktyk. Alle regte voorbehou.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/27000000000" target="_blank" class="whatsapp-float">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.149-.67.149-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="currentColor"/>
+        </svg>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+</html>

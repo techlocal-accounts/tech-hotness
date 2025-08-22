@@ -5,8 +5,10 @@
 }
 
 :root {
-    --primary: #000000;
-    --secondary: #FFFFFF;
+    --primary: #0b3d2e;
+    --secondary: #ffffff;
+    --accent: #1fa27a;
+    --text-light: #f0f0f0;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -19,7 +21,7 @@ html, body {
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     line-height: 1.6;
-    color: var(--secondary);
+    color: var(--text-light);
     background: var(--primary);
     display: flex;
     align-items: center;
@@ -41,7 +43,7 @@ body {
     position: relative;
     z-index: 2;
     text-align: center;
-    color: var(--secondary);
+    color: var(--text-light);
     padding: 2rem;
     animation: fadeInUp 1s ease-out;
     max-width: 90vw;
@@ -140,4 +142,181 @@ body {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
     }
+}
+
+/* Button Styles */
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--accent);
+    color: var(--secondary);
+}
+
+.btn-primary:hover {
+    background-color: #1a8a65;
+    box-shadow: 0 4px 12px rgba(31, 162, 122, 0.3);
+    transform: translateY(-2px);
+}
+
+.btn-whatsapp {
+    background-color: var(--accent);
+    color: var(--secondary);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-whatsapp:hover {
+    background-color: #1a8a65;
+    box-shadow: 0 4px 12px rgba(31, 162, 122, 0.3);
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
+
+/* Navigation and other elements */
+.navbar {
+    background-color: var(--primary);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar a {
+    color: var(--text-light);
+    text-decoration: none;
+}
+
+.navbar a:hover,
+.navbar a.active {
+    color: var(--accent);
+}
+
+/* Form elements */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+select,
+textarea {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-light);
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    transition: var(--transition);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="date"]:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Footer */
+.footer {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: var(--text-light);
+    padding: 40px 0 20px;
+}
+
+.footer a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: #1a8a65;
+}
+
+/* WhatsApp floating button */
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--accent);
+    color: var(--secondary);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(31, 162, 122, 0.3);
+    z-index: 1000;
+    transition: var(--transition);
+}
+
+.whatsapp-float:hover {
+    background-color: #1a8a65;
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(31, 162, 122, 0.4);
+}
+
+/* Page sections */
+.page-hero {
+    background: linear-gradient(135deg, var(--primary) 0%, rgba(31, 162, 122, 0.1) 100%);
+    padding: 80px 0 60px;
+    text-align: center;
+    color: var(--text-light);
+}
+
+.page-hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: var(--secondary);
+}
+
+.page-hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* Links */
+a {
+    color: var(--accent);
+}
+
+a:hover {
+    color: #1a8a65;
+}
+
+/* FAQ Accordion */
+.faq-question {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-light);
+    padding: 15px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.faq-question:hover {
+    background-color: rgba(31, 162, 122, 0.1);
+    border-color: var(--accent);
+}
+
+.faq-answer {
+    background-color: rgba(255, 255, 255, 0.02);
+    padding: 15px;
+    color: var(--text-light);
 }

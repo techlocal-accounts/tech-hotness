@@ -13,8 +13,9 @@
         
         body {
             font-family: system-ui, -apple-system, sans-serif;
-            background: #f0f0f0;
+            background: #0b3d2e;
             padding: 20px;
+            color: #f0f0f0;
         }
         
         .test-container {
@@ -24,7 +25,7 @@
         
         h1 {
             margin-bottom: 20px;
-            color: #333;
+            color: #f0f0f0;
         }
         
         .test-frame {
@@ -46,7 +47,7 @@
             display: block;
             width: 100%;
             border: none;
-            background: #000;
+            background: #0b3d2e;
         }
         
         .desktop {
@@ -64,16 +65,17 @@
         }
         
         .checklist {
-            background: white;
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 8px;
             padding: 20px;
             margin-top: 30px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .checklist h2 {
             margin-bottom: 15px;
-            color: #333;
+            color: #f0f0f0;
         }
         
         .checklist ul {
@@ -83,40 +85,43 @@
         .checklist li {
             padding: 10px;
             margin-bottom: 8px;
-            background: #f8f9fa;
-            border-left: 4px solid #28a745;
+            background: rgba(31, 162, 122, 0.1);
+            border-left: 4px solid #1fa27a;
             border-radius: 4px;
+            color: #f0f0f0;
         }
         
         .checklist li::before {
             content: "✓ ";
-            color: #28a745;
+            color: #1fa27a;
             font-weight: bold;
             margin-right: 8px;
         }
         
         .instructions {
-            background: #fff3cd;
-            border: 1px solid #ffc107;
+            background: rgba(31, 162, 122, 0.15);
+            border: 1px solid #1fa27a;
             border-radius: 8px;
             padding: 15px;
             margin-bottom: 20px;
+            color: #f0f0f0;
         }
         
         .instructions strong {
-            color: #856404;
+            color: #1fa27a;
         }
         
         .edge-fade-note {
-            background: #d4edda;
-            border: 1px solid #c3e6cb;
+            background: rgba(31, 162, 122, 0.1);
+            border: 1px solid rgba(31, 162, 122, 0.5);
             border-radius: 8px;
             padding: 15px;
             margin-bottom: 20px;
+            color: #f0f0f0;
         }
         
         .edge-fade-note strong {
-            color: #155724;
+            color: #1fa27a;
         }
     </style>
 </head>
